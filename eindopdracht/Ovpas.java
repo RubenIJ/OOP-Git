@@ -1,50 +1,19 @@
 package eindopdracht;
 
-public class Ovpas
-{
+public class Ovpas {
     public double kaartBalance;
-   
     public String inchecken;
     public String ingecheckt;
+    public boolean isIngecheckt = false;
     public char[] incheckPaal;
     public String uitchecken;
     public String uitcheck;
- 
-    public void deposit(double x)
-    {
- 
+
+    public Ovpas(double balance) {
+        this.kaartBalance = balance;
     }
- 
-    public String incheckPaal()
-    {
-	int accept = 0;
-	if (inchecken.equalsIgnoreCase("yes") || inchecken.equalsIgnoreCase("ja") || inchecken.equalsIgnoreCase("yahoo") || inchecken.equalsIgnoreCase("misschien :)"))
-	{
-	    accept = accept + 1;
-	}
-	if (accept == 1 && kaartBalance >= 20)
-	{
-	    ingecheckt = "Ingecheckt";
- 
-	}
-	else if (accept == 1 && kaartBalance <= 20)
-	{
-	    ingecheckt = "Sorry geen balance:(";
-	}
-	else
-	{
-	    ingecheckt = "doei:(";
-	}
-	return ingecheckt;
-    }
-    public String uitcheckpaal() {
-	if(ingecheckt.equalsIgnoreCase("ingechekt")) {
-	  uitcheck = "uitgecheckt";
-	    
-	    
-	}
-	
-	    
-	    
+
+    public void deposit(double x) {
+        this.kaartBalance += x;
     }
 }
