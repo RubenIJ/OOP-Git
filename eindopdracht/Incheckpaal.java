@@ -2,33 +2,32 @@ package eindopdracht;
 
 public class Incheckpaal extends Ovpas {
 
+    private static final double INSTAPTARIEF = 20.0;
+
     public Incheckpaal(double balance) {
         super(balance);
     }
 
-    public String incheckPaal() {
-        int accept = 0;
-        if (inchecken.equalsIgnoreCase("yes") || inchecken.equalsIgnoreCase("ja") || inchecken.equalsIgnoreCase("yahoo") || inchecken.equalsIgnoreCase("misschien :)")) {
-            accept++;
-        }
-        if (accept == 1 && kaartBalance >= 20) {
-            ingecheckt = "Ingecheckt";
-            return ingecheckt;
-        } else if (accept == 1 && kaartBalance < 20) {
-            ingecheckt = "Sorry geen saldo :(";
-            return ingecheckt;
+    public String incheck(String antwoord) {
+        if (antwoord.equalsIgnoreCase("ja")) {
+            if (heeftVoldoendeSaldo(INSTAPTARIEF)) {
+                afschrijven(INSTAPTARIEF);
+                setIngecheckt(true);
+                return "Je bent ingecheckt. Instaptarief van €" + INSTAPTARIEF + " is afgeschreven.";
+            } else {
+                return "Onvoldoende saldo om in te checken.";
+            }
         } else {
-            ingecheckt = "doei :(";
-            return ingecheckt;
+            return "Inchecken geannuleerd.";
         }
     }
 
-    public String uitcheckPaal() {
-        if (ingecheckt.equalsIgnoreCase("ingecheckt")) {
-            uitcheck = "uitgecheckt";
-            return uitcheck;
+    public String uitcheck(String antwoord) {
+        if (antwoord.equalsIgnoreCase("ja") && isIngecheckt()) {
+            setIngecheckt(false);
+            return "Je bent succesvol uitgecheckt.";
         } else {
-            return "Niet uitgecheckt.";
+            return "Uitchecken niet gelukt.";
         }
     }
 }

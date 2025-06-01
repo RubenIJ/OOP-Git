@@ -1,19 +1,40 @@
 package eindopdracht;
 
 public class Ovpas {
-    public double kaartBalance;
-    public String inchecken;
-    public String ingecheckt;
-    public boolean isIngecheckt = false;
-    public char[] incheckPaal;
-    public String uitchecken;
-    public String uitcheck;
+    private double kaartBalance;
+    private boolean ingecheckt;
 
     public Ovpas(double balance) {
         this.kaartBalance = balance;
+        this.ingecheckt = false;
     }
 
-    public void deposit(double x) {
-        this.kaartBalance += x;
+    public double getKaartBalance() {
+        return kaartBalance;
+    }
+
+    public void opwaarderen(double bedrag) {
+        if (bedrag > 0) {
+            kaartBalance += bedrag;
+            System.out.println("Saldo succesvol opgewaardeerd. Nieuw saldo: €" + kaartBalance);
+        } else {
+            System.out.println("Ongeldig bedrag.");
+        }
+    }
+
+    public boolean isIngecheckt() {
+        return ingecheckt;
+    }
+
+    public void setIngecheckt(boolean status) {
+        this.ingecheckt = status;
+    }
+
+    public boolean heeftVoldoendeSaldo(double minimum) {
+        return kaartBalance >= minimum;
+    }
+
+    public void afschrijven(double bedrag) {
+        kaartBalance -= bedrag;
     }
 }

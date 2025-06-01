@@ -5,18 +5,26 @@ import java.util.Scanner;
 public class Ov {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Incheckpaal account = new Incheckpaal(25.0);
+        Incheckpaal paal = new Incheckpaal(25.0);
+
+        System.out.println("Saldo op je OV-kaart: €" + paal.getKaartBalance());
+        System.out.println("Wil je je saldo opwaarderen? (ja/nee)");
+        String opwaardeerAntwoord = input.nextLine();
+        if (opwaardeerAntwoord.equalsIgnoreCase("ja")) {
+            System.out.print("Hoeveel wil je opwaarderen? €");
+            double bedrag = input.nextDouble();
+            paal.opwaarderen(bedrag);
+            input.nextLine();
+        }
 
         System.out.println("Wil je inchecken? (ja/nee)");
-        account.inchecken = input.nextLine();
+        String incheckAntwoord = input.nextLine();
+        System.out.println(paal.incheck(incheckAntwoord));
 
-        System.out.println(account.incheckPaal());
-
-        if (account.isIngecheckt) {
+        if (paal.isIngecheckt()) {
             System.out.println("Wil je uitchecken? (ja/nee)");
-            input.nextLine();
-            account.uitchecken = input.nextLine();
-            System.out.println(account.uitcheckPaal());
+            String uitcheckAntwoord = input.nextLine();
+            System.out.println(paal.uitcheck(uitcheckAntwoord));
         }
 
         input.close();
